@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/alisq/agyu/issues"
   },
-  "homepage": "https://github.com/alisq/agyu#readme"
+  "homepage": "https://github.com/alisq/agyu#readme",
+  "dependencies": {
+    "react": "^16.13.1"
+  }
 }
