@@ -1,0 +1,175 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+ 
+@font-face {
+    font-family: 'C1500';
+    src: url('/css/canada1500/canada1500-rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+@font-face {
+    font-family: 'C1500';
+    src: url('/css/canada1500/canada1500-bd.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+} 
+
+@font-face {
+    font-family: 'C1500';
+    src: url('/css/canada1500/canada1500-rg-it.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+} 
+
+@font-face {
+    font-family: 'C1500';
+    src: url('/css/canada1500/canada1500-bd-it.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+} 
+
+body {
+	font-family:'C1500';
+	font-size:18px;
+	line-height:1.4em;
+}
+
+
+h3 {
+	font-weight:bold;
+	font-size:1.2em;
+}
+
+.nav {
+	text-align:center;
+	padding:1em;
+}
+
+button {
+	background:black;
+	padding:0.5em 1em ;
+	color:#FFF;
+	border:2px solid #000;
+	border-radius:20px;
+	font-size:20px;
+}
+
+button:hover {
+	background:white;
+	
+	color:black;
+}
+
+/* teaser */
+
+
+.teaser {
+	display:inline-block;
+	margin:1em;
+}
+
+.teaser-img {
+	display:inline-block;
+	background:#000;
+	min-height:200px;
+	min-width:300px;
+}
+
+/* teaser */
+
+
+.line-teaser {
+	
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	display:grid;
+	grid-template-columns: 2fr 1fr 4fr 1fr
+}
+
+.line-left,
+.line-right {
+	margin:0.5em;
+}
+
+.teaser-img {
+	display:inline-block;
+	background:#000;
+	min-height:200px;
+	min-width:300px;
+}
+
+.full-img {
+	width:60vw;
+	height:40vw;
+	margin:auto;
+	background:#000;
+	display:block;
+	
+}
+
+.caption {
+	width:60vw;
+	margin:auto
+
+}
+
+/* full */
+
+.full {
+	max-width:1200px;
+	margin:auto;
+}
+
+
+.full-contents {
+	display:grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	margin-top:2em;
+}
