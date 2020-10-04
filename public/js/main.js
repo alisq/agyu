@@ -2,6 +2,12 @@ var teasers = [];
 var lines = [];
 var fulls = [];
 
+fetch('/json/artworks')
+  .then(response => response.json())
+  .then(data =>  {
+console.log(data.items)
+  })
+
 
 fetch('/json')
   .then(response => response.json())
