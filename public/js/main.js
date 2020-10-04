@@ -2,6 +2,11 @@ var teasers = [];
 var lines = [];
 var fulls = [];
 
+fetch('http://agyu-drupal.codepanel.in/json/artworks')
+	.then(response => response.json())
+  	.then(data =>  {
+  		console.log(data)
+  		});
 
 fetch('/json')
   .then(response => response.json())
@@ -34,8 +39,22 @@ fetch('/json')
 
 
 var f = "<div class='full'>"+
-	"<img class='full-img' src='"+data[i]["Image address"]+"'>"+
-	"<p class='caption'>"+data[i]["Caption"]+"</p>"+
+
+
+	"<div class='main-carousel'>"+
+	  	"<div class='carousel-cell'>"+
+	  		"<img class='full-img' src='"+data[i]["Image address"]+"'>"+
+	  		"<p class='caption'>"+data[i]["Caption"]+"</p>"+
+	  	"</div>"+
+	  	"<div class='carousel-cell'>"+
+	  		"<img class='full-img' src='"+data[i]["Image address"]+"'>"+
+	  		"<p class='caption'>"+data[i]["Caption"]+"</p>"+
+	  	"</div>"+
+	  	"<div class='carousel-cell'>"+
+	  		"<img class='full-img' src='"+data[i]["Image address"]+"'>"+
+	  		"<p class='caption'>"+data[i]["Caption"]+"</p>"+
+	  	"</div>"+	  		  	
+	 "</div>"+
 	"<div class='full-contents'>"+
 	"<div class='full-left'>"+
 	"<h3 class='work-name'>"+data[i].Title+"</h3>"+
