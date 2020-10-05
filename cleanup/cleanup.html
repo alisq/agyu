@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.min.js"></script>
+
+</head>
+<body>
+
+<a id="programatically" href="#" download="date.csv">Download</a>
+
+
+	<script>
+
+		var artworks, images;
+		 $.ajax({
+        type: "GET",
+        url: "artworks.csv",
+        dataType: "text",
+        success: function(data) {
+        	f = data;
+        	artworks = $.csv.toArrays(data);
+
+
+        	 $.ajax({
+        type: "GET",
+        url: "images.csv",
+        dataType: "text",
+        success: function(data) {
+        	f = data;
+        	images = $.csv.toArrays(data);
+
+        	
+
+
+        	//EVERYTHING GOES HERE...
+
+        	for (i=0; i<images.length;i++) {
+        		accession = images[i][0].split("-")[0].toUpperCase();
+        		//console.log(accession)
+
+        		for (j=0;j<artworks.length;j++) {
+        			if (artworks[j][0] == accession ){
+
+        				if (artworks[j][1] != "") {
+        					g = artworks[j][1]
+        					artworks[j][1] = g+"|"+"http://agyu-drupal.codepanel.in"+images[i][1]
+
+        				} else {
+        					artworks[j][1] = "http://agyu-drupal.codepanel.in"+images[i][1]
+        				}
+
+        				
+        			}
+
+        			
+        			
+        		}
+
+
+
+        	}
+
+
+        	 setTimeout(function(){
+        	 	console.log(encodeURIComponent($.csv.fromArrays(artworks)))
+        	}, 2000);
+
+
+        		$("a#programatically").click(function() {
+
+        			this.href = "data:text/plain;charset=UTF-8," + encodeURIComponent($.csv.fromArrays(artworks));
+        		});
+    			//	var now = new Date().toString();
+    			//	
+
+        }
+
+
+     });
+
+
+	 
+
+        }
+     });
+
+
+
+	
+
+		 
+	</script>
+</body>
+</html>
