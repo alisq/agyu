@@ -8,6 +8,7 @@
 */
 
 
+
 body {
 	line-height: 1;
 	background:#F7F7F7;
@@ -31,28 +32,28 @@ table {
  
 @font-face {
     font-family: 'C1500';
-    src: url('/css/canada1500/canada1500-rg.otf') format('opentype');
+    src: url('../fonts/canada1500-rg.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('/css/canada1500/canada1500-bd.otf') format('opentype');
+    src: url('../fonts/canada1500-bd.otf') format('opentype');
     font-weight: bold;
     font-style: normal;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('/css/canada1500/canada1500-rg-it.otf') format('opentype');
+    src: url('../fonts/canada1500-rg-it.otf') format('opentype');
     font-weight: normal;
     font-style: italic;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('/css/canada1500/canada1500-bd-it.otf') format('opentype');
+    src: url('../fonts/canada1500/canada1500-bd-it.otf') format('opentype');
     font-weight: bold;
     font-style: italic;
 } 
