@@ -3,34 +3,29 @@ var lines = [];
 var fulls = [];
 
 
+
+
 fetch('/json/artworks')
   .then(response => response.json())
   .then(data =>  {
-console.log(data.items)
-  })
-
-
-
-fetch('/json')
-  .then(response => response.json())
-  .then(data =>  {
-  		
-
+	
+		console.log(data);  		
+ 	
   		for (i =0; i<data.length;i++) {
 
+  			console.log(data[i])
 
-
-  			 if (data[i].Title != "") {
+  			 if (data[i].title != "") {
   			var t = "<div class='teaser'>"+
 					"<img class='teaser-img' src='"+data[i]["Image address"]+"'>"+
-					"<h3 class='work-name'>"+data[i].Title+"</h3>"+
-					"<p class='artist-name'>"+data[i].Artist+"</p>"+
+					"<h3 class='work-name'>"+data[i].title+"</h3>"+
+					"<p class='artist-name'>"+data[i].field_artist+"</p>"+
 					"</div>";
 
 			var l = "<div class='line-teaser'>"+
 					 "<div class='line-left'>"+
-					 "<h3 class='work-name'>"+data[i].Title+"</h3>"+
-					 "<p class='artist-name'>"+data[i].Artist+"</p>"+
+					 "<h3 class='work-name'>"+data[i].title+"</h3>"+
+					 "<p class='artist-name'>"+data[i].field_artist+"</p>"+
 					 "</div>"+
 					 "<img class='teaser-img' src='"+data[i]["Image address"]+"'>"+
 					 "<div class='empty'></div>"+
@@ -60,8 +55,8 @@ var f = "<div class='full'>"+
 	 "</div>"+
 	"<div class='full-contents'>"+
 	"<div class='full-left'>"+
-	"<h3 class='work-name'>"+data[i].Title+"</h3>"+
-	"<p class='artist-name'>"+data[i].Artist+"</p>"+
+	"<h3 class='work-name'>"+data[i].title+"</h3>"+
+	"<p class='artist-name'>"+data[i].field_artist+"</p>"+
 	"<p class='work-date'>"+data[i]["date of work"]+"</p>"+
 	"</div>"+
 	"<div class='full-middle'>"+

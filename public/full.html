@@ -24,11 +24,10 @@
 
     <div id="contain">
         
-            <div class="main-carousel">
-                <div class="carousel-cell"><img class="full-img" src="http://agyu-drupal.codepanel.in/sites/default/files/2020-08/a1976.009-2.jpg?itok=VjIgAEEf"><p class="caption"></p></div>
-                <div class="carousel-cell"><img class="full-img" src="http://agyu-drupal.codepanel.in/sites/default/files/2020-08/a1979.054.jpg"><p class="caption"></p></div>
-                <div class="carousel-cell"><img class="full-img" src="http://agyu-drupal.codepanel.in/sites/default/files/2020-08/a1984.004.jpg"><p class="caption"></p></div>
-            </div>
+            
+
+                <!--//IMAGES GO HERE-->
+                <div id="pix"></div>
 
 
             <div class="container">
@@ -36,50 +35,17 @@
             <div class="row">
 
                 <!--BEGIN LEFT COLUMN-->
-                <div class="three columns">
-                    <img src="https://www.gallery.ca/sites/default/files/354_3.jpg">
+                <div class="three columns" id="personality-image">
+                    
                 </div>
                 <!--END LEFT COLUMN-->
                 
                 <!--BEGIN MAIN COLUMN-->
                 <div class="six columns">
-                    <h2>Various Concerns of the Artist</h2>
+                    <h2 id="artwork-title"></h2>
                     <div class="artist-info">
-                        <div class="info ">
-                            <div class="label">Artist</div>
-                            <div class="text">Carl Beam</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="label">Date</div>
-                            <div class="text">1984</div>
-                        </div>
-                        <div class="info">
-                            <div class="label">Medium</div>
-                            <div class="text">Etching on paper</div>
-                        </div>
-                        <div class="info">
-                            <div class="label">Dimensions</div>
-                            <div class="text">116.00 x 76.00 cm</div>
-                        </div>
-                        <div class="info">
-                            <div class="label">Tags</div>
-                            <div class="text">Ojibwe; printmaking; etching; M’Chigeeng First Nation   </div>
-                        </div>
-                        <div class="info">
-                            <div class="label">Description</div>
-                            <div class="text">As with much of Beam’s print work, the image is heavily layered and liberally uses phototransfers. Two figures (one of which is a self portrait, the other appears to be archeological remains) dominate the upper third of the print. The lower 2/3rds of the image is taken up primarily with an image of an elk, with claw marks across almost like the print has been cancelled (or is it the trace of a bear claw?). A small portion of text appears along the bottom right, an archaeological report published by the ROM? A caption on a museum display?</div>
-                        </div>
+                        
                     </div>
-           
-
-
-
-
-      
-                    
-                    
-                    
                 </div>
                 <!--END MAIN COLUMN-->
 
@@ -128,6 +94,11 @@
                 
                 
             </div>
+
+            <div class="row" id="related">
+                <h3>Related Works</h3>
+
+            </div>
         </div>
             
 
@@ -137,16 +108,156 @@
 <!-- JavaScript -->
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
         
-        <!-- <script src="js/main.js"></script> -->
+        <script src="js/functions.js"></script>
 
         <script>
-            $('.main-carousel').flickity({
-              // options
-              cellAlign: 'left',
-              contain: true,
-              wrapAround: true
-            });
 
+
+
+
+            const queryString = window.location.search;
+            console.log(queryString);
+            // ?product=shirt&color=blue&newuser&size=m
+
+            const urlParams = new URLSearchParams(queryString);
+
+
+
+//TRUSTED IDs
+//15404
+//15181
+//14907 = no images
+
+fetch('/json/artworks/'+urlParams.get("id"))
+  .then(response => response.json())
+  .then(data =>  {
+    
+
+    
+    
+    
+
+
+    artist = "";
+    fetch("/json/personalities/"+data[0].field_artist)
+      .then(response => response.json())
+      .then(p =>  {
+        artist = p[0].title;
+        
+
+
+pi = ""
+if (p[0].field_personality_image != "") {
+    pi = "<img src='"+p[0].field_personality_image+"' />"
+    
+} else {
+    pi="."
+}
+
+
+$("#personality-image").html(pi)
+
+
+
+      
+//THIS WILL PULL RELATED ARTISTS
+
+fetch('/json/artworks/artist/'+data[0].field_artist)
+  .then(response => response.json())
+  .then(rel =>  {
+
+
+            //see functions.js for related content function
+        $("#related").append(related(rel,artist))
+
+    });
+    
+
+    $("#artwork-title").html(data[0].title)
+    $("title").text(data[0].title+" - "+artist)
+
+        var info="";
+
+
+        //artist name
+        info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'>"+artist+"</div></div></div>"
+
+
+        //artwork date
+        if (data[0].field_date_of_work != "") {
+           info+="<div class='info'><div class='label'>Date</div><div id='artist-name' class='text'>"+data[0].field_date_of_work+"</div></div></div>"
+        }
+
+        //artwork medium
+        if (data[0].field_medium != "") {
+           info+="<div class='info'><div class='label'>Medium</div><div id='medium' class='text'>"+data[0].field_medium+"</div></div></div>"
+        }
+
+        //artwork Dimensions
+        if (data[0].field_dimensions != "") {
+           info+="<div class='info'><div class='label'>Dimensions</div><div id='dimensions' class='text'>"+data[0].field_dimensions+"</div></div></div>"
+        }
+                       
+        //artwork tags
+        if (data[0].field_tags != "") {
+           info+="<div class='info'><div class='label'>Tags</div><div id='tags' class='text'>"+data[0].field_tags+"</div></div></div>"
+        }
+
+         if (data[0].body != "") {
+            info+="<div class='info'><div class='label'>Description</div><div id='description' class='text'>"+data[0].body+"</div></div>"                                    
+         }
+
+
+
+         $(".artist-info").html(info)
+           
+
+
+
+
+
+        //THIS GENERATES IMAGE CAROUSEL
+        images="";
+        if (data[0].field_images != "") {
+
+            f = data[0].field_images.split(", ")
+
+          images+="<div class='main-carousel'>";
+            
+                for(i=0;i<f.length;i++) {
+                    images+="<div class='carousel-cell'><img class='full-img' src='"+f[i]+"'><p class='caption'></p></div>";    
+                }
+                
+                images+="</div>"
+
+            if (f.length>1) {
+
+                setTimeout(function(){
+                 $('.main-carousel').flickity({
+                      // options
+                      cellAlign: 'left',
+                      contain: true,
+                      wrapAround: true
+                    });
+
+                },50)      
+
+            } 
+            
+        }  
+
+        $("#pix").html(images)
+
+
+        
+
+
+        })
+    });
+
+
+
+           
 </script>
 
     </body>

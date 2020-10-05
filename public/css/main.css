@@ -7,6 +7,18 @@
    License: none (public domain)
 */
 
+ 
+
+a,
+a:link,
+a:visited {
+	color:#2E2E2E;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
 
 
 body {
@@ -32,28 +44,28 @@ table {
  
 @font-face {
     font-family: 'C1500';
-    src: url('../fonts/canada1500-rg.otf') format('opentype');
+    src: url('../font/canada1500-rg.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('../fonts/canada1500-bd.otf') format('opentype');
+    src: url('../font/canada1500-bd.otf') format('opentype');
     font-weight: bold;
     font-style: normal;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('../fonts/canada1500-rg-it.otf') format('opentype');
+    src: url('../font/canada1500-rg-it.otf') format('opentype');
     font-weight: normal;
     font-style: italic;
 } 
 
 @font-face {
     font-family: 'C1500';
-    src: url('../fonts/canada1500/canada1500-bd-it.otf') format('opentype');
+    src: url('../font/canada1500/canada1500-bd-it.otf') format('opentype');
     font-weight: bold;
     font-style: italic;
 } 
@@ -66,9 +78,20 @@ body {
 
 
 h3 {
-	font-weight:bold;
-	font-size:1.2em;
+	/*font-weight:bold;
+	font-size:1.2em;*/
+
+	    border-bottom: 1px solid #2E2E2E;
+    column-span: all;
+    margin-bottom: 0.25em;
+    padding-bottom: 0.25em;
+    font-size: 1.4em;
+    font-family: 'Times New Roman';
+    letter-spacing: 0;
+    margin: 16px;
 }
+
+
 
 .nav {
 	background:var(--main-color);
@@ -91,6 +114,10 @@ button:hover {
 
 /* teaser */
 
+
+#contain {
+	margin-top:54px;
+}
 
 .teaser {
 	display:inline-block;
@@ -128,8 +155,10 @@ button:hover {
 }
 
 .full-img {
-	width:60vw;
-	height:40vw;
+	/*width:60vw;*/
+	 
+    min-height: 40vw;
+    max-height: 40vw;
 	margin:auto;
 	background:#000;
 	display:block;
@@ -137,7 +166,7 @@ button:hover {
 }
 
 .caption {
-	width:60vw;
+	width:100vw;
 	margin:auto
 
 }
@@ -171,7 +200,7 @@ button:hover {
   /*height: 200px;*/
   background: #fff;
   /* center images in cells with flexbox */
-  display: flex;
+  /*display: flex;*/
   align-items: center;
   justify-content: center;
 }
@@ -181,11 +210,11 @@ button:hover {
 }
 
 .carousel-cell img {
-  display: block;
+/*  display: block;*/
 
-    transform: translate(50%);
+    /*transform: translate(50%);*/
 
-  max-height: 100%;
+/*  max-height: 100%;*/
 }
 
 .logo {
@@ -264,4 +293,23 @@ button.expand {
 
 .right-menu .info:hover button.expand {
 	transform:rotate(0deg);
+}
+
+
+#related {
+	margin-top:2em;
+	column-count: 4;
+    column-gap: 30px;
+}
+
+.teaser {
+	margin-bottom:30px;
+}
+
+.teaser img {
+	margin-bottom:15px;
+}
+
+.teaser:hover img {
+	opacity:0.8;
 }
