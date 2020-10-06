@@ -12,20 +12,35 @@
         <link rel="stylesheet" href="css/skeleton.css">
         <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <script src="https://kit.fontawesome.com/c44918b16d.js" crossorigin="anonymous"></script>
+
     </head>
     <body>
         
-        <div class="nav">
-            <button class="teasers">teasers</button>
-            <button class="lines">lines</button>
-            <button class="fulls">fulls</button>
+         <div class="nav">
+            <div class="logo"><a href="/agyu/public/">collections.agYU</a></div>
+        
+            <div class="search">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
 
+    <div id="contain">
+        
+            
 
-</div>
+                <!--//IMAGES GO HERE-->
+                <div id="pix"></div>
 
-    <div id="container">
-    </div>
+
+            <div class="container">
+
+            <div class="row" id="related">
+                
+
+            </div>
+        </div>
+            
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
    <!-- CSS -->
@@ -33,7 +48,148 @@
 <!-- JavaScript -->
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
         
-        <script src="js/main.js"></script>
+        <script src="js/functions.js"></script>
+
+        <script>
+
+
+
+
+      
+//THIS WILL PULL RELATED ARTISTS
+
+fetch('/json/only_artworks/')
+  .then(response => response.json())
+  .then(rel =>  {
+
+        
+
+
+    c = ""
+    for(r=0;r<rel.length;r++) {
+        //console.log(rel[r])
+        c+= "<div class='teaser'>"+
+                "<a href='/agyu/public/artwork.html?id="+rel[r].nid+"'>"+
+                "<img src='"+rel[r].field_images.split(",")[0]+"' />"+
+                "<strong>"+rel[r].title+"</strong><br />"+
+                "<span class='artist-name'>"+rel[r].field_artist+"</span>"+
+            "</a>"+
+            "</div>"
+   }
+    $("#related").append(c)
+       
+        
+
+    });
+    
+
+//fix this. this sucks.
+  setTimeout(function(){
+
+    $(".artist-name").each(function(){
+        m = $(this)
+        n = m.text();
+
+
+
+        fetch("/json/personalities/"+n)
+        .then(response=>response.json())
+        .then(art => {
+            a = art[0].title;
+            
+            m.text(a)
+        })
+    })
+
+  },500)
+
+
+//    $("#artwork-title").html(data[0].title)
+  //  $("title").text(data[0].title+" - "+artist)
+
+        // var info="";
+
+
+        // //artist name
+        // info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'><a href='artist.html?id="+data[0].field_artist+"'>"+artist+"</a></div></div></div>"
+
+
+        // //artwork date
+        // if (data[0].field_date_of_work != "") {
+        //    info+="<div class='info'><div class='label'>Date</div><div id='artist-name' class='text'>"+data[0].field_date_of_work+"</div></div></div>"
+        // }
+
+        // //artwork medium
+        // if (data[0].field_medium != "") {
+        //    info+="<div class='info'><div class='label'>Medium</div><div id='medium' class='text'>"+data[0].field_medium+"</div></div></div>"
+        // }
+
+        // //artwork Dimensions
+        // if (data[0].field_dimensions != "") {
+        //    info+="<div class='info'><div class='label'>Dimensions</div><div id='dimensions' class='text'>"+data[0].field_dimensions+"</div></div></div>"
+        // }
+                       
+        // //artwork tags
+        // if (data[0].field_tags != "") {
+        //    info+="<div class='info'><div class='label'>Tags</div><div id='tags' class='text'>"+data[0].field_tags+"</div></div></div>"
+        // }
+
+        //  if (data[0].body != "") {
+        //     info+="<div class='info'><div class='label'>Description</div><div id='description' class='text'>"+data[0].body+"</div></div>"                                    
+        //  }
+
+
+
+        //  $(".artist-info").html(info)
+           
+
+
+
+
+
+        // //THIS GENERATES IMAGE CAROUSEL
+        // images="";
+        // if (data[0].field_images != "") {
+
+        //     f = data[0].field_images.split(", ")
+
+        //   images+="<div class='main-carousel'>";
+            
+        //         for(i=0;i<f.length;i++) {
+        //             images+="<div class='carousel-cell'><img class='full-img' src='"+f[i]+"'><p class='caption'></p></div>";    
+        //         }
+                
+        //         images+="</div>"
+
+        //     if (f.length>1) {
+
+        //         setTimeout(function(){
+        //          $('.main-carousel').flickity({
+        //               // options
+        //               cellAlign: 'left',
+        //               contain: true,
+        //               wrapAround: true
+        //             });
+
+        //         },50)      
+
+        //     } 
+            
+        // }  
+
+        // $("#pix").html(images)
+
+
+        
+
+
+    //     })
+    // });
+
+
+
+           
+</script>
 
     </body>
 </html>
