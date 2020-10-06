@@ -1,7 +1,7 @@
 
 //this generated artist-info
 function artistInfo() {
-	
+
 }
 
 
@@ -10,9 +10,9 @@ function related(rel,artist) {
 
 	c = ""
     for(r=0;r<rel.length;r++) {
-    	console.log(rel[r])
+    	//console.log(rel[r])
         c+=	"<div class='teaser'>"+
-        		"<a href='/agyu/public/full.html?id="+rel[r].nid+"'>"+
+        		"<a href='/agyu/public/artwork.html?id="+rel[r].nid+"'>"+
         		"<img src='"+rel[r].field_images.split(",")[0]+"' />"+
         		"<strong>"+rel[r].title+"</strong><br />"+
         		artist+

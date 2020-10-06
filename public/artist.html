@@ -17,6 +17,8 @@
         
         <div class="nav">
      <div class="logo">agYU</div>
+        
+<div class="search">search</div>
         </div>
 
 
@@ -128,22 +130,18 @@
 //15181
 //14907 = no images
 
-fetch('/json/artworks/'+urlParams.get("id"))
-  .then(response => response.json())
-  .then(data =>  {
-    
 
-    
     
     
 
 
     artist = "";
-    fetch("/json/personalities/"+data[0].field_artist)
+    fetch("/json/personalities/"+urlParams.get("id"))
       .then(response => response.json())
       .then(p =>  {
+        console.log(p)
         artist = p[0].title;
-        
+        artistID = p[0].nid;
 
 
 pi = ""
@@ -157,12 +155,39 @@ if (p[0].field_personality_image != "") {
 
 $("#personality-image").html(pi)
 
+    $("#artwork-title").html(artist)
+    $("title").text(artist)
 
 
+
+    var info="";
+    //artist dates
+        if (p[0].field_birth_year != "") {
+
+            d = p[0].field_birth_year+"—";
+            if (p[0].field_death_year != "") {
+                d+=p[0].field_death_year
+            }
+           info+="<div class='info'><div class='label'>Dates</div><div id='artist-name' class='text'>"+d+"</div></div></div>"
+        }
+
+
+
+        //artist tags
+        if (p[0].field_tags != "") {
+           info+="<div class='info'><div class='label'>Tags</div><div id='tags' class='text'>"+p[0].field_tags+"</div></div></div>"
+        }
+
+
+                 if (p[0].body != "") {
+            info+="<div class='info'><div class='label'>Description</div><div id='description' class='text'>"+p[0].body+"</div></div>"                                    
+         }
+
+        $(".artist-info").html(info)
       
 //THIS WILL PULL RELATED ARTISTS
 
-fetch('/json/artworks/artist/'+data[0].field_artist)
+fetch('/json/artworks/artist/'+urlParams.get("id"))
   .then(response => response.json())
   .then(rel =>  {
 
@@ -171,90 +196,128 @@ fetch('/json/artworks/artist/'+data[0].field_artist)
         $("#related").append(related(rel,artist))
 
     });
+
+
+});
     
 
-    $("#artwork-title").html(data[0].title)
-    $("title").text(data[0].title+" - "+artist)
+    
 
-        var info="";
-
-
-        //artist name
-        info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'>"+artist+"</div></div></div>"
+    
 
 
-        //artwork date
-        if (data[0].field_date_of_work != "") {
-           info+="<div class='info'><div class='label'>Date</div><div id='artist-name' class='text'>"+data[0].field_date_of_work+"</div></div></div>"
-        }
+    //     //artist name
+    //     info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'>"+artist+"</div></div></div>"
 
-        //artwork medium
-        if (data[0].field_medium != "") {
-           info+="<div class='info'><div class='label'>Medium</div><div id='medium' class='text'>"+data[0].field_medium+"</div></div></div>"
-        }
 
-        //artwork Dimensions
-        if (data[0].field_dimensions != "") {
-           info+="<div class='info'><div class='label'>Dimensions</div><div id='dimensions' class='text'>"+data[0].field_dimensions+"</div></div></div>"
-        }
-                       
-        //artwork tags
-        if (data[0].field_tags != "") {
-           info+="<div class='info'><div class='label'>Tags</div><div id='tags' class='text'>"+data[0].field_tags+"</div></div></div>"
-        }
+    //    
 
-         if (data[0].body != "") {
-            info+="<div class='info'><div class='label'>Description</div><div id='description' class='text'>"+data[0].body+"</div></div>"                                    
-         }
+    //     //artwork medium
+    //     if (data[0].field_medium != "") {
+    //        info+="<div class='info'><div class='label'>Medium</div><div id='medium' class='text'>"+data[0].field_medium+"</div></div></div>"
+    //     }
+
+    //     //artwork Dimensions
+    //     if (data[0].field_dimensions != "") {
+    //        info+="<div class='info'><div class='label'>Dimensions</div><div id='dimensions' class='text'>"+data[0].field_dimensions+"</div></div></div>"
+    //     }
+          
 
 
 
-         $(".artist-info").html(info)
+
+
+    //      $(".artist-info").html(info)
            
 
 
 
 
 
-        //THIS GENERATES IMAGE CAROUSEL
-        images="";
-        if (data[0].field_images != "") {
+    //     //THIS GENERATES IMAGE CAROUSEL
+    //     images="";
+    //     if (data[0].field_images != "") {
 
-            f = data[0].field_images.split(", ")
+    //         f = data[0].field_images.split(", ")
 
-          images+="<div class='main-carousel'>";
+    //       images+="<div class='main-carousel'>";
             
-                for(i=0;i<f.length;i++) {
-                    images+="<div class='carousel-cell'><img class='full-img' src='"+f[i]+"'><p class='caption'></p></div>";    
-                }
+    //             for(i=0;i<f.length;i++) {
+    //                 images+="<div class='carousel-cell'><img class='full-img' src='"+f[i]+"'><p class='caption'></p></div>";    
+    //             }
                 
-                images+="</div>"
+    //             images+="</div>"
 
-            if (f.length>1) {
+    //         if (f.length>1) {
 
-                setTimeout(function(){
-                 $('.main-carousel').flickity({
-                      // options
-                      cellAlign: 'left',
-                      contain: true,
-                      wrapAround: true
-                    });
+    //             setTimeout(function(){
+    //              $('.main-carousel').flickity({
+    //                   // options
+    //                   cellAlign: 'left',
+    //                   contain: true,
+    //                   wrapAround: true
+    //                 });
 
-                },50)      
+    //             },50)      
 
-            } 
+    //         } 
             
-        }  
+    //     }  
 
-        $("#pix").html(images)
+    //     $("#pix").html(images)
 
 
         
 
 
-        })
-    });
+    //     })
+    // });
 
+
+
+$(".search").click(function(){
+
+    $("<input type='text' id='search-bar'/>").appendTo("body");
+    $("#search-bar").focus();
+
+    $("#search-bar").keypress(function(e){
+        searchTerm = $("#search-bar").val();
+        if (searchTerm.length > 3) {
+           fetchURL = "/json/search_feed/?title="+searchTerm;
+           fetchURLArtist = "json/search_feed/artists/?artist="+searchTerm;
+
+           fetch(fetchURL)
+              .then(response => response.json())
+              .then(searchData =>  {
+                    console.log()
+              
+
+
+           fetch(fetchURLArtist)
+              .then(response => response.json())
+              .then(sData =>  {
+                    
+                    //console.log([...searchData, ...sData])
+
+
+              
+
+
+              });
+
+
+
+
+              });
+
+
+
+
+
+
+        }
+    })
+}) 
 
 
            

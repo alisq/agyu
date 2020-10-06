@@ -116,7 +116,7 @@ button:hover {
 
 
 #contain {
-	margin-top:54px;
+	margin-top:108px;
 }
 
 .teaser {
@@ -303,13 +303,31 @@ button.expand {
 }
 
 .teaser {
-	margin-bottom:30px;
+	margin-bottom: 1em;
+    padding: 0.5em;
 }
 
 .teaser img {
-	margin-bottom:15px;
+	margin-bottom:0.25em;
 }
 
-.teaser:hover img {
-	opacity:0.8;
+.teaser:hover  {
+	background:#2E2E2E;
+	color:#FFF;
+}
+
+.teaser:hover a {
+	color:#FFF;
+}
+
+
+#search-bar {
+	position:fixed;
+	height:54px;
+	color:red;
+	border:1px solid red;
+	background:white;
+	z-index: 99999;
+	top:0; left:0;
+	width:100%;
 }

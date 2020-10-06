@@ -139,11 +139,13 @@ fetch('/json/artworks/'+urlParams.get("id"))
 
 
     artist = "";
+    artistID = "";
     fetch("/json/personalities/"+data[0].field_artist)
       .then(response => response.json())
       .then(p =>  {
         artist = p[0].title;
-        
+        artistID = p[0].nid;
+
 
 
 pi = ""
@@ -180,7 +182,7 @@ fetch('/json/artworks/artist/'+data[0].field_artist)
 
 
         //artist name
-        info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'>"+artist+"</div></div></div>"
+        info+="<div class='info'><div class='label'>Artist</div><div id='artist-name' class='text'><a href='artist.html?id="+data[0].field_artist+"'>"+artist+"</a></div></div></div>"
 
 
         //artwork date
